@@ -40,19 +40,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inizializzazione delle View
         calendarView = findViewById(R.id.calendarView);
         tvSelectedDate = findViewById(R.id.tvSelectedDate);
         etReminder = findViewById(R.id.etReminder);
         btnSave = findViewById(R.id.btnSave);
-        btnGoToInfo = findViewById(R.id.btnGoToInfo); // Inizializzazione nuovo bottone
+        btnGoToInfo = findViewById(R.id.btnGoToInfo);
         listViewReminders = findViewById(R.id.listViewReminders);
 
-        // Inizializzazione SharedPreferences e Liste (Requisito 3.5 SharedPreferences)
         sharedPreferences = getSharedPreferences("SchoolCalendarPrefs", Context.MODE_PRIVATE);
         remindersList = new ArrayList<>();
 
-        // Impostiamo il giorno corrente come predefinito all'avvio
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         selectedDate = sdf.format(calendar.getTime());
@@ -71,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Gestione del pulsante Salva
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     saveReminder(selectedDate, reminderText);
                     etReminder.setText("");
 
-                    // REQUISITO 3.2 & 3.3: Facciamo partire il Service che genera la Notifica
                     Intent serviceIntent = new Intent(MainActivity.this, ReminderService.class);
                     serviceIntent.putExtra("nota_testo", "Nuovo appunto aggiunto per il " + selectedDate + ": " + reminderText);
                     startService(serviceIntent);
@@ -92,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Navigazione verso la terza Activity (Info/Crediti) (Requisito 3.1)
         btnGoToInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,16 +95,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Navigazione verso la seconda Activity (Dettaglio) al click su un elemento della lista (Requisito 3.1)
         listViewReminders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String promemoriaSelezionato = remindersList.get(position);
 
-                // Evitiamo il click se la lista mostra il messaggio di vuoto
                 if (!promemoriaSelezionato.equals("Nessun impegno scolastico per oggi.")) {
                     Intent intentDettaglio = new Intent(MainActivity.this, DettaglioActivity.class);
-                    // Passaggio dati via Extra dell'Intent
                     intentDettaglio.putExtra("data_selezionata", selectedDate);
                     intentDettaglio.putExtra("testo_promemoria", promemoriaSelezionato);
                     startActivity(intentDettaglio);

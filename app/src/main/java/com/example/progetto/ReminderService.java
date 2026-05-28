@@ -14,31 +14,28 @@ public class ReminderService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Recuperiamo il testo del promemoria inviato dall'Activity
         String infoNota = intent.getStringExtra("nota_testo");
         if (infoNota == null) infoNota = "Hai degli impegni scolastici da controllare!";
 
         creaNotificationChannel();
         inviaNotifica(infoNota);
 
-        // Ferma il servizio automaticamente una volta inviata la notifica
         stopSelf();
         return START_NOT_STICKY;
     }
 
     private void inviaNotifica(String testo) {
-        // Intent per riaprire l'app (MainActivity) cliccando sulla notifica
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE
         );
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_lock_idle_alarm) // Icona di sistema temporanea
+                .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
                 .setContentTitle("Promemoria Scolastico")
                 .setContentText(testo)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent) // Apre l'activity
+                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
         NotificationManager manager = getSystemService(NotificationManager.class);

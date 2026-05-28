@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvDettaglioData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data: --"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Testo dell'impegno scolastico:"
+        android:textSize="14sp"
+        android:textColor="#555555" />
+
+    <TextView
+        android:id="@+id/tvDettaglioTesto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Testo della nota"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="32dp"
+        android:padding="8dp"
+        android:background="#F0F0F0"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Azioni disponibili (Requisiti di Progetto):"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnCondividi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Condividi con i compagni"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnCercaInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cerca info sul web"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnSalvaFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esporta come Backup (.txt)"
+        android:backgroundTint="#4CAF50"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>
